@@ -52,6 +52,7 @@
     <Compile Include="Core\Application.cs" />
     <Compile Include="Core\Platform.cs" />
     <Compile Include="Core\PlatformType.cs" />
+    <Compile Include="Game\Attributes.cs" />
     <Compile Include="Game\GameManager.cs" />
     <Compile Include="Graphics\RenderLoop.cs" />
   </ItemGroup>
