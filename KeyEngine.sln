@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26127.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyEngine", "Source\KeyEngine\KeyEngine.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Players", "Players", "{1D81F04B-AE26-4280-98FB-DE0626D4000E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player.Windows", "Source\Players\Windows\Player.Windows.csproj", "{B17951AF-4010-447E-85C3-A478AA5EFEB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B17951AF-4010-447E-85C3-A478AA5EFEB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B17951AF-4010-447E-85C3-A478AA5EFEB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B17951AF-4010-447E-85C3-A478AA5EFEB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B17951AF-4010-447E-85C3-A478AA5EFEB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B17951AF-4010-447E-85C3-A478AA5EFEB3} = {1D81F04B-AE26-4280-98FB-DE0626D4000E}
+	EndGlobalSection
+EndGlobal
