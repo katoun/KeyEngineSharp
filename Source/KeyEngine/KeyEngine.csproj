@@ -52,8 +52,13 @@
     <Compile Include="Core\Application.cs" />
     <Compile Include="Core\Platform.cs" />
     <Compile Include="Core\PlatformType.cs" />
+    <Compile Include="Core\Quaternion.cs" />
+    <Compile Include="Core\Vector3.cs" />
     <Compile Include="Game\Attributes.cs" />
+    <Compile Include="Game\Component.cs" />
     <Compile Include="Game\GameManager.cs" />
+    <Compile Include="Game\GameObject.cs" />
+    <Compile Include="Game\Transform.cs" />
     <Compile Include="Graphics\RenderLoop.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
