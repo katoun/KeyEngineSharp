@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Application.cs" />
+    <Compile Include="Core\MathUtils.cs" />
+    <Compile Include="Core\Matrix4x4.cs" />
     <Compile Include="Core\Platform.cs" />
     <Compile Include="Core\PlatformType.cs" />
     <Compile Include="Core\Quaternion.cs" />

@@ -14,6 +14,32 @@ namespace KeyEngine.Core
         public float Z;
         public float W;
 
+        public float this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0: return X;
+                    case 1: return Y;
+                    case 2: return Z;
+                    case 3: return W;
+                    default: throw new ArgumentOutOfRangeException();
+                }
+            }
+            set
+            {
+                switch (index)
+                {
+                    case 0: X = value; break;
+                    case 1: Y = value; break;
+                    case 2: Z = value; break;
+                    case 3: W = value; break;
+                    default: throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
         public Quaternion(float x, float y, float z, float w)
         {
             X = x; Y = y; Z = z; W = w;
@@ -24,24 +50,23 @@ namespace KeyEngine.Core
             Quaternion result;
             Vector3 normalize = axis.normalized;
 
-            float half = angle * 0.5f;
+            float half = MathUtils.ToRadians(angle) * 0.5f;
             float sin = (float)Math.Sin(half);
-            float cos = (float)Math.Cos(half);
 
             result.X = normalize.X * sin;
             result.Y = normalize.Y * sin;
             result.Z = normalize.Z * sin;
-            result.W = cos;
+            result.W = (float)Math.Cos(half);
 
             return result;
         }
 
-        public static Quaternion Euler(float x, float y, float z)
+        public static Quaternion EulerAngles(float x, float y, float z)
         {
             Quaternion result;
-            float halfX = x * 0.5f;
-            float halfY = y * 0.5f;
-            float halfZ = z * 0.5f;
+            float halfX = MathUtils.ToRadians(x) * 0.5f;
+            float halfY = MathUtils.ToRadians(y) * 0.5f;
+            float halfZ = MathUtils.ToRadians(z) * 0.5f;
 
             float sinX = (float)Math.Sin(halfX);
             float cosX = (float)Math.Cos(halfX);
@@ -52,12 +77,69 @@ namespace KeyEngine.Core
             float sinZ = (float)Math.Sin(halfZ);
             float cosZ = (float)Math.Cos(halfZ);
 
-            Quaternion qX = new Quaternion(sinX, 0.0F, 0.0F, cosX);
-            Quaternion qY = new Quaternion(0.0F, sinY, 0.0F, cosY);
-            Quaternion qZ = new Quaternion(0.0F, 0.0F, sinZ, cosZ);
+            result.X = (cosY * sinX * cosZ) + (sinY * cosX * sinZ);
+            result.Y = (sinY * cosX * cosZ) - (cosY * sinX * sinZ);
+            result.Z = (cosY * cosX * sinZ) - (sinY * sinX * cosZ);
+            result.W = (cosY * cosX * cosZ) + (sinY * sinX * sinZ);
 
-            result = (qY * qX) * qZ;
- 
+            return result;
+        }
+
+        public static Quaternion RotationMatrix(Matrix4x4 matrix)
+        {
+            float scale = 1f + matrix.M11 + matrix.M22 + matrix.M33;
+
+            Quaternion result;
+
+            if (scale > 0f)
+            {
+                float sqrt = (float)Math.Sqrt(scale + 1f);
+
+                result.W = sqrt * 0.5f;
+
+                sqrt = 0.5f / sqrt;
+
+                result.X = (matrix.M23 - matrix.M32) * sqrt;
+                result.Y = (matrix.M31 - matrix.M13) * sqrt;
+                result.Z = (matrix.M12 - matrix.M21) * sqrt;
+            }
+            else if (matrix.M11 >= matrix.M22 && matrix.M11 >= matrix.M33)
+            {
+                float sqrt = (float)Math.Sqrt(1 + matrix.M11 - matrix.M22 - matrix.M33);
+
+                result.X = sqrt * 0.5f;
+
+                sqrt = 0.5f / sqrt;
+
+                result.Y = (matrix.M12 + matrix.M21) * sqrt;
+                result.Z = (matrix.M13 + matrix.M31) * sqrt;
+                result.W = (matrix.M23 - matrix.M32) * sqrt;
+            }
+            else if (matrix.M22 > matrix.M33)
+            {
+                float sqrt = (float)Math.Sqrt(1 + matrix.M22 - matrix.M11 - matrix.M33);
+
+                result.Y = sqrt * 0.5f;
+
+                sqrt = 0.5f / sqrt;
+
+                result.X = (matrix.M21 + matrix.M12) * sqrt;
+                result.Z = (matrix.M32 + matrix.M23) * sqrt;
+                result.W = (matrix.M31 - matrix.M13) * sqrt;
+            }
+            else
+            {
+                float sqrt = (float)Math.Sqrt(1.0f + matrix.M33 - matrix.M11 - matrix.M22);
+
+                result.Z = sqrt * 0.5f;
+
+                sqrt = 0.5f / sqrt;
+
+                result.X = (matrix.M31 + matrix.M13) * sqrt;
+                result.Y = (matrix.M32 + matrix.M23) * sqrt;
+                result.W = (matrix.M12 - matrix.M21) * sqrt;
+            }
+
             return result;
         }
 
@@ -182,6 +264,6 @@ namespace KeyEngine.Core
             return X.GetHashCode() ^ (Y.GetHashCode() << 2) ^ (Z.GetHashCode() >> 2) ^ (W.GetHashCode() >> 1);
         }
 
-        public static Quaternion Identity { get { return new Quaternion(0F, 0F, 0F, 1F); } }
+        public static Quaternion Identity { get { return new Quaternion(0f, 0f, 0f, 1f); } }
     }
 }

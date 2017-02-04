@@ -16,7 +16,6 @@ namespace KeyEngine.Game
 
         Core.Vector3 m_EulerAngles = Core.Vector3.Zero;//cached euler angles
 
-
         public Core.Vector3 EulerAngles
         {
             get { return m_EulerAngles; }
