@@ -232,6 +232,17 @@ namespace KeyEngine.Core
                 a.M41 != b.M41 || a.M42 != b.M42 || a.M43 != b.M43 || a.M44 != b.M44);
         }
 
+        public float determinant
+        {
+            get
+            {
+                return M11 * (M22 * (M33 * M44 - M34 * M43) + M23 * (M34 * M42 - M32 * M44) + M24 * (M32 * M43 - M33 * M42)) -
+                    M12 * (M21 * (M33 * M44 - M34 * M43) + M23 * (M34 * M41 - M31 * M44) + M24 * (M31 * M43 - M33 * M41)) +
+                    M13 * (M21 * -(M34 * M42 - M32 * M44) + M22 * (M34 * M41 - M31 * M44) + M24 * (M31 * M42 - M32 * M41)) -
+                    M14 * (M21 * (M32 * M43 - M33 * M42) + M22 * -(M31 * M43 - M33 * M41) + M23 * (M31 * M42 - M32 * M41));
+            }
+        }
+
         public static Matrix4x4 Transpose(Matrix4x4 value)
         {
             Matrix4x4 result;

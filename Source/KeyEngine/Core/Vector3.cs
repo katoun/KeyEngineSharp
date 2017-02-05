@@ -63,14 +63,24 @@ namespace KeyEngine.Core
             return new Vector3(a.X * value, a.Y * value, a.Z * value);
         }
 
-        public static Vector3 operator *(float value, Vector3 a)
+        public static Vector3 operator *(float value, Vector3 b)
         {
-            return new Vector3(a.X * value, a.Y * value, a.Z * value);
+            return new Vector3(b.X * value, b.Y * value, b.Z * value);
+        }
+
+        public static Vector3 operator *(Vector3 a, Vector3 b)
+        {
+            return new Vector3(a.X * b.X, a.Y * b.Y, a.Z * b.Z);
         }
 
         public static Vector3 operator /(Vector3 a, float value)
         {
             return new Vector3(a.X / value, a.Y / value, a.Z / value);
+        }
+
+        public static Vector3 operator /(Vector3 a, Vector3 b)
+        {
+            return new Vector3(a.X / b.X, a.Y / b.Y, a.Z / b.Z);
         }
 
         public static bool operator ==(Vector3 a, Vector3 b)

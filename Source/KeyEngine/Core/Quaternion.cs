@@ -61,12 +61,12 @@ namespace KeyEngine.Core
             return result;
         }
 
-        public static Quaternion EulerAngles(float x, float y, float z)
+        public static Quaternion EulerAngles(Vector3 value)
         {
             Quaternion result;
-            float halfX = MathUtils.ToRadians(x) * 0.5f;
-            float halfY = MathUtils.ToRadians(y) * 0.5f;
-            float halfZ = MathUtils.ToRadians(z) * 0.5f;
+            float halfX = MathUtils.ToRadians(value.X) * 0.5f;
+            float halfY = MathUtils.ToRadians(value.Y) * 0.5f;
+            float halfZ = MathUtils.ToRadians(value.Z) * 0.5f;
 
             float sinX = (float)Math.Sin(halfX);
             float cosX = (float)Math.Cos(halfX);
@@ -168,6 +168,15 @@ namespace KeyEngine.Core
             return result;
         }
 
+        public static Vector3 operator *(Quaternion q, Vector3 v)
+        {
+            Vector3 result;
+            result.X = v.X - (q.Y * q.Y * 2f + q.Z * q.Z * 2f) * v.X + (q.X * q.Y * 2f - q.Z * q.W * 2f) * v.Y + (q.X * q.Z * 2f + q.Y * q.W * 2f) * v.Z;
+            result.Y = v.Y + (q.X * q.Y * 2f + q.Z * q.W * 2f) * v.X - (q.X * q.X * 2f + q.Z * q.Z * 2f) * v.Y + (q.Y * q.Z * 2f - q.X * q.W * 2f) * v.Z;
+            result.Z = v.Z + (q.X * q.Z * 2f - q.Y * q.W * 2f) * v.X + (q.Y * q.Z * 2f + q.X * q.W * 2f) * v.Y - (q.X * q.X * 2f + q.Y * q.Y * 2f) * v.Z;
+            return result;
+        }
+
         public static Quaternion operator *(Quaternion a, Quaternion b)
         {
             Quaternion result;
@@ -222,6 +231,63 @@ namespace KeyEngine.Core
         }
 
         public Quaternion normalized { get { return Normalize(this); } }
+
+        public void Conjugate()
+        {
+            X = -X; Y = -Y; Z = -Z;
+        }
+
+        public static Quaternion Conjugate(Quaternion value)
+        {
+            return new Quaternion(-value.X, -value.Y, -value.Z, value.W);
+        }
+
+        public Quaternion conjugate { get { return Conjugate(this); } }
+
+        public static Quaternion Inverse(Quaternion value)
+        {
+            float inverseNorm = 1f / value.SqrMagnitude();
+
+            return new Quaternion(-value.X * inverseNorm, -value.Y * inverseNorm, -value.Z * inverseNorm, value.W * inverseNorm);
+        }
+
+        public Quaternion inverse { get { return Inverse(this); } }
+
+        public static Vector3 EulerAngles(Quaternion value)
+        {
+            const float SINGULARITY_CUTOFF = 0.499999f;
+
+            Vector3 result;
+
+            float singularity = value.Y * value.Z - value.X * value.W;
+            float z1 = 2f * (-value.X * value.Y + value.Z * value.W);
+            float z2 = value.Y * value.Y - value.Z * value.Z - value.X * value.X + value.W * value.W;
+            float x1 = -1f;
+            float x2 = 2f * singularity;
+
+            if (Math.Abs(singularity) < SINGULARITY_CUTOFF)
+            {
+                float y1 = 2f * (value.X * value.Z + value.Y * value.W);
+                float y2 = value.Z * value.Z - value.X * value.X - value.Y * value.Y + value.W * value.W;
+
+                result.X = x1 * (float)Math.Asin(x2);
+                result.Y = (float)Math.Atan2(y1, y2);
+                result.Z = (float)Math.Atan2(z1, z2);
+            }
+            else
+            {
+                float y1 = (value.X * value.Y + value.Z * value.W) * (value.Y * value.Z + value.X * value.W) + (-value.Y * value.Z + value.X * value.W) * (value.X * value.Y - value.Z * value.W);
+                float y2 = (-value.Y * value.Z + value.X * value.W) * (value.Y * value.Z + value.X * value.W) - (value.X * value.Y + value.Z * value.W) * (value.X * value.Y - value.Z * value.W);
+
+                result.X = x1 * (float)Math.Asin(x2);
+                result.Y = (float)Math.Atan2(y1, y2);
+                result.Z = 0f;
+            }
+
+            return result;
+        }
+
+        public Vector3 eulerAngles { get { return EulerAngles(this); } }
 
         public static float Dot(Quaternion a, Quaternion b)
         {

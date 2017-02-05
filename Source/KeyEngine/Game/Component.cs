@@ -13,5 +13,9 @@ namespace KeyEngine.Game
             get { return m_GameObject; }
             internal set { m_GameObject = value; }
         }
+
+        public virtual void Begin() { }
+        public virtual void Update() { }
+        public virtual void End() { }
     }
 }
