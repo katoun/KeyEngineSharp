@@ -5,8 +5,6 @@ using System.Drawing;
 using System.Threading;
 
 using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
 using KeyEngine.Graphics;
@@ -163,8 +161,6 @@ namespace KeyEngine
             {
                 if (viewportResized)
                 {
-                    GL.Viewport(0, 0, viewportWidth, viewportHeight);
-
                     RenderLoop.Current.HandleViewportResized(viewportWidth, viewportHeight);
 
                     viewportResized = false;

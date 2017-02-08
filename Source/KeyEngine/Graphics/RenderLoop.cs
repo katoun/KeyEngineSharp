@@ -100,7 +100,7 @@ namespace KeyEngine.Graphics
 
         public void HandleViewportResized(int width, int height)
         {
-            //TODO!!!
+            GL.Viewport(0, 0, width, height);
         }
 
         public void HandleWindowMoved(float deltaX, float deltaY)
