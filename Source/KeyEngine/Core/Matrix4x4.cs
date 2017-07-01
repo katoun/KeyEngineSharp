@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KeyEngine.Core
 {
@@ -479,6 +475,25 @@ namespace KeyEngine.Core
 
             return result;
         }
+
+        public override bool Equals(object other)
+        {
+            if (!(other is Matrix4x4))
+                return false;
+
+            Matrix4x4 b = (Matrix4x4)other;
+            return
+
+            M11.Equals(b.M11) && M12.Equals(b.M12) && M13.Equals(b.M13) && M14.Equals(b.M14) &&
+                M21.Equals(b.M21) && M22.Equals(b.M22) && M23.Equals(b.M23) && M24.Equals(b.M24) &&
+                M31.Equals(b.M31) && M32.Equals(b.M32) && M33.Equals(b.M33) && M34.Equals(b.M34) &&
+                M41.Equals(b.M41) && M42.Equals(b.M42) && M43.Equals(b.M43) && M44.Equals(b.M44);
+        }
+
+        //public override int GetHashCode()
+        //{
+        //    return 0;
+        //}
 
         public static Matrix4x4 Zero { get { return new Matrix4x4(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f); } }
         public static Matrix4x4 Identity { get { return new Matrix4x4(1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f); } }

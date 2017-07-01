@@ -15,9 +15,7 @@ namespace KeyEngine.Game
         Transform m_Parent = null;
 
         Core.Vector3 m_LocalPosition = Core.Vector3.Zero;
-
         Core.Quaternion m_LocalRotation = Core.Quaternion.Identity;
-
         Core.Vector3 m_LocalScale = Core.Vector3.One;
 
         Core.Vector3 m_Position = Core.Vector3.Zero;//cached

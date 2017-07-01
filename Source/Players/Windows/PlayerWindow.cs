@@ -134,6 +134,8 @@ namespace KeyEngine
                 SwapBuffers();
             }
 
+            RenderLoop.Current.Stop();
+
             Context.MakeCurrent(null);
         }
 

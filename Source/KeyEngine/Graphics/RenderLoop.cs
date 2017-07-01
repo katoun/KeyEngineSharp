@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+
+using KeyEngine.Core;
 
 namespace KeyEngine.Graphics
 {
@@ -24,6 +25,8 @@ namespace KeyEngine.Graphics
 
         public void Start()
         {
+            Time.Start();
+
             for (int i = 0; i < 64; i++)
             {
                 Particle p = new Particle();
@@ -34,7 +37,7 @@ namespace KeyEngine.Graphics
                 Particles.Add(p);
             }
 
-            GL.ClearColor(Color.MidnightBlue);
+            GL.ClearColor(0, 0, 1, 1);
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.PointSmooth);
             GL.PointSize(16);
@@ -42,6 +45,8 @@ namespace KeyEngine.Graphics
 
         public void Update(double time)
         {
+            Time.Update();
+
             // For simplicity, we use simple Euler integration to simulate particle movement.
             // This is not accurate, especially under varying timesteps (as is the case here).
             // A better solution would have been time-corrected Verlet integration, as
@@ -96,6 +101,11 @@ namespace KeyEngine.Graphics
                 GL.Vertex2(p.Position);
             }
             GL.End();
+        }
+
+        public void Stop()
+        {
+            Time.Stop();
         }
 
         public void HandleViewportResized(int width, int height)
