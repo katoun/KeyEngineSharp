@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Application.cs" />
+    <Compile Include="Core\Log.cs" />
     <Compile Include="Core\MathUtils.cs" />
     <Compile Include="Core\Matrix4x4.cs" />
     <Compile Include="Core\Platform.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Game\GameObject.cs" />
     <Compile Include="Game\Transform.cs" />
     <Compile Include="Graphics\Color.cs" />
+    <Compile Include="Graphics\NativeWindow.cs" />
     <Compile Include="Graphics\RenderLoop.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

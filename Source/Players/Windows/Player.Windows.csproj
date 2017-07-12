@@ -55,9 +55,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="PlayerApplication.cs" />
-    <Compile Include="PlayerWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Icon.ico" />

@@ -1,8 +1,6 @@
 ﻿using System;
 
-using OpenTK;
-
-namespace KeyEngine
+namespace KeyEngine.Player
 {
     class PlayerApplication : Core.Application, IDisposable
     {
@@ -15,12 +13,12 @@ namespace KeyEngine
         public void Run()
         {
             IsPlaying = true;
-            using (GameWindow example = new PlayerWindow())
+            using (Graphics.NativeWindow window = new Graphics.NativeWindow())
             {
-                OnQuit -= example.Close;
-                OnQuit += example.Close;
+                OnQuit -= window.Close;
+                OnQuit += window.Close;
 
-                example.Run();
+                window.Run();
             }
         }
 

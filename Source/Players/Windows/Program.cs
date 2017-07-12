@@ -1,11 +1,11 @@
 using System;
 
-namespace KeyEngine
+namespace KeyEngine.Player
 {
-    class Player
+    internal static class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             using (PlayerApplication app = new PlayerApplication())
             {

@@ -6,11 +6,10 @@ namespace KeyEngine.Core
     public class Time
     {
         static Stopwatch timer = new Stopwatch();
-        static long lastStartTime;
 
         static float deltaTime = 0f;
 
-        public float DeltaTime
+        public static float DeltaTime
         {
             get { return deltaTime; }
         }
@@ -18,22 +17,18 @@ namespace KeyEngine.Core
         internal static void Start()
         {
             timer.Start();
-
-            lastStartTime = timer.ElapsedMilliseconds;
         }
 
         internal static void Update()
         {
-            float result = (float)(timer.ElapsedMilliseconds - lastStartTime) / 1000;
-
-            lastStartTime = timer.ElapsedMilliseconds;
+            deltaTime = (float)timer.Elapsed.TotalSeconds;
+            timer.Reset();
+            timer.Start();
         }
 
         internal static void Stop()
         {
             timer.Stop();
         }
-
-        //TODO!!!
     }
 }

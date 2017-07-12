@@ -25,8 +25,6 @@ namespace KeyEngine.Graphics
 
         public void Start()
         {
-            Time.Start();
-
             for (int i = 0; i < 64; i++)
             {
                 Particle p = new Particle();
@@ -43,10 +41,8 @@ namespace KeyEngine.Graphics
             GL.PointSize(16);
         }
 
-        public void Update(double time)
+        public void Update(float dt)
         {
-            Time.Update();
-
             // For simplicity, we use simple Euler integration to simulate particle movement.
             // This is not accurate, especially under varying timesteps (as is the case here).
             // A better solution would have been time-corrected Verlet integration, as
@@ -60,7 +56,7 @@ namespace KeyEngine.Graphics
                 p.Velocity.Y = Math.Abs(p.Position.Y) >= 1 ? -p.Velocity.Y * 0.92f : p.Velocity.Y * 0.97f;
                 if (p.Position.Y > -0.99)
                 {
-                    p.Velocity.Y += (float)(GravityAccel * time);
+                    p.Velocity.Y += GravityAccel * dt;
                 }
                 else
                 {
@@ -75,7 +71,7 @@ namespace KeyEngine.Graphics
                     }
                 }
 
-                p.Position += p.Velocity * (float)time;
+                p.Position += p.Velocity * dt;
                 if (p.Position.Y <= -1)
                     p.Position.Y = -1;
 
@@ -83,7 +79,7 @@ namespace KeyEngine.Graphics
             }
         }
 
-        public void Render(double time)
+        public void Render()
         {
             Matrix4 perspective = Matrix4.CreateOrthographic(2, 2, -1, 1);
             GL.MatrixMode(MatrixMode.Projection);
@@ -105,7 +101,7 @@ namespace KeyEngine.Graphics
 
         public void Stop()
         {
-            Time.Stop();
+            //TODO!!!
         }
 
         public void HandleViewportResized(int width, int height)
