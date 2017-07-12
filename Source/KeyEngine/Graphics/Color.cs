@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using KeyEngine.Core;
 
 namespace KeyEngine.Graphics
 {
-    [Serializable]
-    public class Color
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Color : IEquatable<Color>
     {
         public float R;
         public float G;
@@ -79,12 +80,12 @@ namespace KeyEngine.Graphics
 
         public static bool operator ==(Color a, Color b)
         {
-            return a.R == b.R && a.G == b.G && a.B == b.B && a.A == b.A;
+            return a.Equals(b);
         }
 
         public static bool operator !=(Color a, Color b)
         {
-            return !(a == b);
+            return !a.Equals(b);
         }
 
         public static Color Lerp(Color a, Color b, float t)
@@ -92,13 +93,20 @@ namespace KeyEngine.Graphics
             return new Color(MathUtils.Lerp(a.R, b.R, t), MathUtils.Lerp(a.G, b.G, t), MathUtils.Lerp(a.B, b.B, t), MathUtils.Lerp(a.A, b.A, t));
         }
 
-        public override bool Equals(object other)
+        public bool Equals(Color value)
         {
-            if (!(other is Color))
+            return R.Equals(value.R) && G.Equals(value.G) && B.Equals(value.B) && A.Equals(value.A);
+        }
+
+        public override bool Equals(object value)
+        {
+            if (value == null)
                 return false;
 
-            Color b = (Color)other;
-            return R.Equals(b.R) && G.Equals(b.G) && B.Equals(b.B) && A.Equals(b.A);
+            if (!(value is Color))
+                return false;
+
+            return Equals((Color)value);
         }
 
         public override int GetHashCode()
@@ -106,16 +114,16 @@ namespace KeyEngine.Graphics
             return R.GetHashCode() ^ (G.GetHashCode() << 2) ^ (B.GetHashCode() >> 2) ^ (A.GetHashCode() >> 1);
         }
 
-        public static Color Red { get { return new Color(1f, 0f, 0f, 1f); } }
-        public static Color Green { get { return new Color(0f, 1f, 0f, 1f); } }
-        public static Color Blue { get { return new Color(0f, 0f, 1f, 1f); } }
-        public static Color White { get { return new Color(1f, 1f, 1f, 1f); } }
-        public static Color Black { get { return new Color(0f, 0f, 0f, 1f); } }
-        public static Color Yellow { get { return new Color(1f, 1f, 0f, 1f); } }
-        public static Color Cyan { get { return new Color(0f, 1f, 1f, 1f); } }
-        public static Color Magenta { get { return new Color(1f, 0f, 1f, 1f); } }
-        public static Color Gray { get { return new Color(0.5f, 0.5f, 0.5f, 1f); } }
-        public static Color Grey { get { return new Color(0.5f, 0.5f, 0.5f, 1f); } }
-        public static Color Clear { get { return new Color(0f, 0f, 0f, 0f); } }
+        public static readonly Color Red = new Color(1f, 0f, 0f, 1f);
+        public static readonly Color Green = new Color(0f, 1f, 0f, 1f);
+        public static readonly Color Blue = new Color(0f, 0f, 1f, 1f);
+        public static readonly Color White = new Color(1f, 1f, 1f, 1f);
+        public static readonly Color Black = new Color(0f, 0f, 0f, 1f);
+        public static readonly Color Yellow = new Color(1f, 1f, 0f, 1f);
+        public static readonly Color Cyan = new Color(0f, 1f, 1f, 1f);
+        public static readonly Color Magenta = new Color(1f, 0f, 1f, 1f);
+        public static readonly Color Gray = new Color(0.5f, 0.5f, 0.5f, 1f);
+        public static readonly Color Grey = new Color(0.5f, 0.5f, 0.5f, 1f);
+        public static readonly Color Clear = new Color(0f, 0f, 0f, 0f);
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace KeyEngine.Core
 {
-    [Serializable]
-    public struct Vector3
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Vector3: IEquatable<Vector3>
     {
         public float X;
         public float Y;
@@ -85,12 +86,12 @@ namespace KeyEngine.Core
 
         public static bool operator ==(Vector3 a, Vector3 b)
         {
-            return Dot(a, b) < float.Epsilon * float.Epsilon;
+            return a.Equals(b);
         }
 
         public static bool operator !=(Vector3 a, Vector3 b)
         {
-            return Dot(a, b) >= float.Epsilon * float.Epsilon;
+            return !a.Equals(b);
         }
 
         public static Vector3 Cross(Vector3 a, Vector3 b)
@@ -136,15 +137,22 @@ namespace KeyEngine.Core
                 return Zero;
         }
 
-        public Vector3 normalized { get { return Normalize(this); } }
+        public Vector3 Normalized { get { return Normalize(this); } }
 
-        public override bool Equals(object other)
+        public bool Equals(Vector3 value)
         {
-            if (!(other is Vector3))
+            return X.Equals(value.X) && Y.Equals(value.Y) && Z.Equals(value.Z);
+        }
+
+        public override bool Equals(object value)
+        {
+            if (value == null)
                 return false;
 
-            Vector3 b = (Vector3)other;
-            return X.Equals(b.X) && Y.Equals(b.Y) && Z.Equals(b.Z);
+            if (!(value is Vector3))
+                return false;
+
+            return Equals((Vector3)value);
         }
 
         public override int GetHashCode()

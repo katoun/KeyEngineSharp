@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace KeyEngine.Core
 {
-    [Serializable]
-    public struct Matrix4x4
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Matrix4x4 : IEquatable<Matrix4x4>
     {
         public float M11;
         public float M12;
@@ -476,24 +477,32 @@ namespace KeyEngine.Core
             return result;
         }
 
-        public override bool Equals(object other)
+        public bool Equals(Matrix4x4 value)
         {
-            if (!(other is Matrix4x4))
-                return false;
-
-            Matrix4x4 b = (Matrix4x4)other;
-            return
-
-            M11.Equals(b.M11) && M12.Equals(b.M12) && M13.Equals(b.M13) && M14.Equals(b.M14) &&
-                M21.Equals(b.M21) && M22.Equals(b.M22) && M23.Equals(b.M23) && M24.Equals(b.M24) &&
-                M31.Equals(b.M31) && M32.Equals(b.M32) && M33.Equals(b.M33) && M34.Equals(b.M34) &&
-                M41.Equals(b.M41) && M42.Equals(b.M42) && M43.Equals(b.M43) && M44.Equals(b.M44);
+            return M11.Equals(value.M11) && M12.Equals(value.M12) && M13.Equals(value.M13) && M14.Equals(value.M14) &&
+                M21.Equals(value.M21) && M22.Equals(value.M22) && M23.Equals(value.M23) && M24.Equals(value.M24) &&
+                M31.Equals(value.M31) && M32.Equals(value.M32) && M33.Equals(value.M33) && M34.Equals(value.M34) &&
+                M41.Equals(value.M41) && M42.Equals(value.M42) && M43.Equals(value.M43) && M44.Equals(value.M44);
         }
 
-        //public override int GetHashCode()
-        //{
-        //    return 0;
-        //}
+        public override bool Equals(object value)
+        {
+            if (value == null)
+                return false;
+
+            if (!(value is Matrix4x4))
+                return false;
+
+            return Equals((Matrix4x4)value);
+        }
+
+        public override int GetHashCode()
+        {
+            return M11.GetHashCode() + M12.GetHashCode() + M13.GetHashCode() + M14.GetHashCode() +
+               M21.GetHashCode() + M22.GetHashCode() + M23.GetHashCode() + M24.GetHashCode() +
+               M31.GetHashCode() + M32.GetHashCode() + M33.GetHashCode() + M34.GetHashCode() +
+               M41.GetHashCode() + M42.GetHashCode() + M43.GetHashCode() + M44.GetHashCode();
+        }
 
         public static Matrix4x4 Zero { get { return new Matrix4x4(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f); } }
         public static Matrix4x4 Identity { get { return new Matrix4x4(1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f); } }

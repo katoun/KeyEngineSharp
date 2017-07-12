@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace KeyEngine.Core
 {
-    [Serializable]
-    public struct Quaternion
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Quaternion : IEquatable<Quaternion>
     {
         public float X;
         public float Y;
@@ -48,7 +45,7 @@ namespace KeyEngine.Core
         public static Quaternion AngleAxis(float angle, Vector3 axis)
         {
             Quaternion result;
-            Vector3 normalize = axis.normalized;
+            Vector3 normalize = axis.Normalized;
 
             float half = MathUtils.ToRadians(angle) * 0.5f;
             float sin = (float)Math.Sin(half);
@@ -194,12 +191,12 @@ namespace KeyEngine.Core
 
         public static bool operator ==(Quaternion a, Quaternion b)
         {
-            return Dot(a, b) > 1.0f - float.Epsilon;
+            return a.Equals(b);
         }
 
         public static bool operator !=(Quaternion a, Quaternion b)
         {
-            return Dot(a, b) <= 1.0f - float.Epsilon;
+            return !a.Equals(b);
         }
 
         public float SqrMagnitude()
@@ -251,7 +248,7 @@ namespace KeyEngine.Core
             return new Quaternion(-value.X * inverseNorm, -value.Y * inverseNorm, -value.Z * inverseNorm, value.W * inverseNorm);
         }
 
-        public Quaternion inverse { get { return Inverse(this); } }
+        public Quaternion Inversed { get { return Inverse(this); } }
 
         public static Vector3 EulerAngles(Quaternion value)
         {
@@ -317,12 +314,20 @@ namespace KeyEngine.Core
             return result;
         }
 
-        public override bool Equals(object other)
+        public bool Equals(Quaternion value)
         {
-            if (!(other is Quaternion)) return false;
+            return X.Equals(value.X) && Y.Equals(value.Y) && Z.Equals(value.Z) && W.Equals(value.W);
+        }
 
-            Quaternion b = (Quaternion)other;
-            return X.Equals(b.X) && Y.Equals(b.Y) && Z.Equals(b.Z) && W.Equals(b.W);
+        public override bool Equals(object value)
+        {
+            if (value == null)
+                return false;
+
+            if (!(value is Quaternion))
+                return false;
+
+            return Equals((Quaternion)value);
         }
 
         public override int GetHashCode()
@@ -330,6 +335,6 @@ namespace KeyEngine.Core
             return X.GetHashCode() ^ (Y.GetHashCode() << 2) ^ (Z.GetHashCode() >> 2) ^ (W.GetHashCode() >> 1);
         }
 
-        public static Quaternion Identity { get { return new Quaternion(0f, 0f, 0f, 1f); } }
+        public static readonly Quaternion Identity = new Quaternion(0f, 0f, 0f, 1f);
     }
 }
