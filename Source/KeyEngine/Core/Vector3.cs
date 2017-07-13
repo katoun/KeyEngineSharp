@@ -3,170 +3,170 @@ using System.Runtime.InteropServices;
 
 namespace KeyEngine.Core
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Vector3: IEquatable<Vector3>
-    {
-        public float X;
-        public float Y;
-        public float Z;
+	[StructLayout(LayoutKind.Sequential)]
+	public struct Vector3 : IEquatable<Vector3>
+	{
+		public float X;
+		public float Y;
+		public float Z;
 
-        public float this[int index]
-        {
-            get
-            {
-                switch (index)
-                {
-                    case 0: return X;
-                    case 1: return Y;
-                    case 2: return Z;
-                    default: throw new ArgumentOutOfRangeException();
-                }
-            }
-            set
-            {
-                switch (index)
-                {
-                    case 0: X = value; break;
-                    case 1: Y = value; break;
-                    case 2: Z = value; break;
-                    default: throw new ArgumentOutOfRangeException();
-                }
-            }
-        }
+		public float this[int index]
+		{
+			get
+			{
+				switch (index)
+				{
+					case 0: return X;
+					case 1: return Y;
+					case 2: return Z;
+					default: throw new ArgumentOutOfRangeException();
+				}
+			}
+			set
+			{
+				switch (index)
+				{
+					case 0: X = value; break;
+					case 1: Y = value; break;
+					case 2: Z = value; break;
+					default: throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
 
-        public Vector3(float x, float y, float z)
-        {
-            X = x; Y = y; Z = z;
-        }
+		public Vector3(float x, float y, float z)
+		{
+			X = x; Y = y; Z = z;
+		}
 
-        public Vector3(float x, float y)
-        {
-            X = x; Y = y; Z = 0.0f;
-        }
+		public Vector3(float x, float y)
+		{
+			X = x; Y = y; Z = 0.0f;
+		}
 
-        public static Vector3 operator +(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
-        }
+		public static Vector3 operator +(Vector3 a, Vector3 b)
+		{
+			return new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+		}
 
-        public static Vector3 operator -(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
-        }
+		public static Vector3 operator -(Vector3 a, Vector3 b)
+		{
+			return new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+		}
 
-        public static Vector3 operator -(Vector3 a)
-        {
-            return new Vector3(-a.X, -a.Y, -a.Z);
-        }
+		public static Vector3 operator -(Vector3 a)
+		{
+			return new Vector3(-a.X, -a.Y, -a.Z);
+		}
 
-        public static Vector3 operator *(Vector3 a, float value)
-        {
-            return new Vector3(a.X * value, a.Y * value, a.Z * value);
-        }
+		public static Vector3 operator *(Vector3 a, float value)
+		{
+			return new Vector3(a.X * value, a.Y * value, a.Z * value);
+		}
 
-        public static Vector3 operator *(float value, Vector3 b)
-        {
-            return new Vector3(b.X * value, b.Y * value, b.Z * value);
-        }
+		public static Vector3 operator *(float value, Vector3 b)
+		{
+			return new Vector3(b.X * value, b.Y * value, b.Z * value);
+		}
 
-        public static Vector3 operator *(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.X * b.X, a.Y * b.Y, a.Z * b.Z);
-        }
+		public static Vector3 operator *(Vector3 a, Vector3 b)
+		{
+			return new Vector3(a.X * b.X, a.Y * b.Y, a.Z * b.Z);
+		}
 
-        public static Vector3 operator /(Vector3 a, float value)
-        {
-            return new Vector3(a.X / value, a.Y / value, a.Z / value);
-        }
+		public static Vector3 operator /(Vector3 a, float value)
+		{
+			return new Vector3(a.X / value, a.Y / value, a.Z / value);
+		}
 
-        public static Vector3 operator /(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.X / b.X, a.Y / b.Y, a.Z / b.Z);
-        }
+		public static Vector3 operator /(Vector3 a, Vector3 b)
+		{
+			return new Vector3(a.X / b.X, a.Y / b.Y, a.Z / b.Z);
+		}
 
-        public static bool operator ==(Vector3 a, Vector3 b)
-        {
-            return a.Equals(b);
-        }
+		public static bool operator ==(Vector3 a, Vector3 b)
+		{
+			return a.Equals(b);
+		}
 
-        public static bool operator !=(Vector3 a, Vector3 b)
-        {
-            return !a.Equals(b);
-        }
+		public static bool operator !=(Vector3 a, Vector3 b)
+		{
+			return !a.Equals(b);
+		}
 
-        public static Vector3 Cross(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z, a.X * b.Y - a.Y * b.X);
-        }
+		public static Vector3 Cross(Vector3 a, Vector3 b)
+		{
+			return new Vector3(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z, a.X * b.Y - a.Y * b.X);
+		}
 
-        public static float Dot(Vector3 a, Vector3 b)
-        {
-            return (a.X * b.X + a.Y * b.Y + a.Z * b.Z);
-        }
+		public static float Dot(Vector3 a, Vector3 b)
+		{
+			return (a.X * b.X + a.Y * b.Y + a.Z * b.Z);
+		}
 
-        public float SqrMagnitude()
-        {
-            return (X * X) + (Y * Y) + (Z * Z);
-        }
+		public float SqrMagnitude()
+		{
+			return (X * X) + (Y * Y) + (Z * Z);
+		}
 
-        public float Magnitude()
-        {
-            return (float)Math.Sqrt(SqrMagnitude());
-        }
+		public float Magnitude()
+		{
+			return (float)Math.Sqrt(SqrMagnitude());
+		}
 
-        public static float Distance(Vector3 a, Vector3 b)
-        {
-            return (a - b).Magnitude();
-        }
+		public static float Distance(Vector3 a, Vector3 b)
+		{
+			return (a - b).Magnitude();
+		}
 
-        public void Normalize()
-        {
-            float magnitude = Magnitude();
-            if (magnitude > float.Epsilon)
-                this = this / magnitude;
-            else
-                this = Zero;
-        }
+		public void Normalize()
+		{
+			float magnitude = Magnitude();
+			if (magnitude > float.Epsilon)
+				this = this / magnitude;
+			else
+				this = Zero;
+		}
 
-        public static Vector3 Normalize(Vector3 value)
-        {
-            float magnitude = value.Magnitude();
-            if (magnitude > float.Epsilon)
-                return value / magnitude;
-            else
-                return Zero;
-        }
+		public static Vector3 Normalize(Vector3 value)
+		{
+			float magnitude = value.Magnitude();
+			if (magnitude > float.Epsilon)
+				return value / magnitude;
+			else
+				return Zero;
+		}
 
-        public Vector3 Normalized { get { return Normalize(this); } }
+		public Vector3 Normalized { get { return Normalize(this); } }
 
-        public bool Equals(Vector3 value)
-        {
-            return X.Equals(value.X) && Y.Equals(value.Y) && Z.Equals(value.Z);
-        }
+		public bool Equals(Vector3 value)
+		{
+			return X.Equals(value.X) && Y.Equals(value.Y) && Z.Equals(value.Z);
+		}
 
-        public override bool Equals(object value)
-        {
-            if (value == null)
-                return false;
+		public override bool Equals(object value)
+		{
+			if (value == null)
+				return false;
 
-            if (!(value is Vector3))
-                return false;
+			if (!(value is Vector3))
+				return false;
 
-            return Equals((Vector3)value);
-        }
+			return Equals((Vector3)value);
+		}
 
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() ^ (Y.GetHashCode() << 2) ^ (Z.GetHashCode() >> 2);
-        }
+		public override int GetHashCode()
+		{
+			return X.GetHashCode() ^ (Y.GetHashCode() << 2) ^ (Z.GetHashCode() >> 2);
+		}
 
-        public static Vector3 Zero { get { return new Vector3(0f, 0f, 0f); } }
-        public static Vector3 One { get { return new Vector3(1f, 1f, 1f); } }
-        public static Vector3 Forward { get { return new Vector3(0f, 0f, 1f); } }
-        public static Vector3 Back { get { return new Vector3(0f, 0f, -1f); } }
-        public static Vector3 Up { get { return new Vector3(0f, 1f, 0f); } }
-        public static Vector3 Down { get { return new Vector3(0f, -1f, 0f); } }
-        public static Vector3 Left { get { return new Vector3(-1f, 0f, 0f); } }
-        public static Vector3 Right { get { return new Vector3(1f, 0f, 0f); } }
-    }
+		public static Vector3 Zero { get { return new Vector3(0f, 0f, 0f); } }
+		public static Vector3 One { get { return new Vector3(1f, 1f, 1f); } }
+		public static Vector3 Forward { get { return new Vector3(0f, 0f, 1f); } }
+		public static Vector3 Back { get { return new Vector3(0f, 0f, -1f); } }
+		public static Vector3 Up { get { return new Vector3(0f, 1f, 0f); } }
+		public static Vector3 Down { get { return new Vector3(0f, -1f, 0f); } }
+		public static Vector3 Left { get { return new Vector3(-1f, 0f, 0f); } }
+		public static Vector3 Right { get { return new Vector3(1f, 0f, 0f); } }
+	}
 }

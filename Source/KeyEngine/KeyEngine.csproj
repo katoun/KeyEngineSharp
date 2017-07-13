@@ -56,6 +56,7 @@
     <Compile Include="Core\Platform.cs" />
     <Compile Include="Core\PlatformType.cs" />
     <Compile Include="Core\Quaternion.cs" />
+    <Compile Include="Core\ResourceNames.cs" />
     <Compile Include="Core\Time.cs" />
     <Compile Include="Core\Vector3.cs" />
     <Compile Include="Game\Attributes.cs" />

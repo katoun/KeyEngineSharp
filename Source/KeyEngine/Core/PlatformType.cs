@@ -2,10 +2,10 @@
 
 namespace KeyEngine.Core
 {
-    public enum PlatformType : byte
-    {
-        WINDOWS,
-        LINUX,
-        ANDROID
-    }
+	public enum PlatformType : byte
+	{
+		WINDOWS,
+		LINUX,
+		ANDROID
+	}
 }

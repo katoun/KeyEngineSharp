@@ -3,19 +3,34 @@ using System.Collections.Generic;
 
 namespace KeyEngine.Game
 {
-    [Serializable]
-    public class Component
-    {
-        GameObject m_GameObject = null;
+	[EditorIcon(Core.ResourceNames.IconComponent)]
+	public class Component
+	{
+		protected bool active = true;
+		protected GameObject gameObject = null;
 
-        public GameObject GameObject
-        {
-            get { return m_GameObject; }
-            internal set { m_GameObject = value; }
-        }
+		public bool Active
+		{
+			get { return active; }
+			set { active = value; }
+		}
 
-        public virtual void Begin() { }
-        public virtual void Update() { }
-        public virtual void End() { }
-    }
+		public GameObject GameObject
+		{
+			get { return gameObject; }
+			internal set { gameObject = value; }
+		}
+
+		public virtual void Begin() { }
+		public virtual void Update() { }
+		public virtual void End() { }
+
+		public void Dispose()
+		{
+			if (gameObject != null)
+			{
+				gameObject.RemoveComponent(this);
+			}
+		}
+	}
 }

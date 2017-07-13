@@ -2,29 +2,29 @@
 
 namespace KeyEngine.Player
 {
-    class PlayerApplication : Core.Application, IDisposable
-    {
-        public PlayerApplication()
-        {
-            IsPlaying = false;
-            IsEditor = false;
-        }
+	class PlayerApplication : Core.Application, IDisposable
+	{
+		public PlayerApplication()
+		{
+			IsPlaying = false;
+			IsEditor = false;
+		}
 
-        public void Run()
-        {
-            IsPlaying = true;
-            using (Graphics.NativeWindow window = new Graphics.NativeWindow())
-            {
-                OnQuit -= window.Close;
-                OnQuit += window.Close;
+		public void Run()
+		{
+			IsPlaying = true;
+			using (Graphics.NativeWindow window = new Graphics.NativeWindow())
+			{
+				OnQuit -= window.Close;
+				OnQuit += window.Close;
 
-                window.Run();
-            }
-        }
+				window.Run();
+			}
+		}
 
-        void IDisposable.Dispose()
-        {
-            IsPlaying = false;
-        }
-    }
+		void IDisposable.Dispose()
+		{
+			IsPlaying = false;
+		}
+	}
 }

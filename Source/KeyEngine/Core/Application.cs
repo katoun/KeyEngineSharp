@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace KeyEngine.Core
 {
-    public class Application
-    {
-        public static bool IsEditor;
-        public static bool IsPlaying;
+	public class Application
+	{
+		public static bool IsEditor;
+		public static bool IsPlaying;
 
-        public static string Version = "v0.0.1";
+		public static string Version = "v0.0.1";
 
-        protected static event Action OnQuit;
+		protected static event Action OnQuit;
 
-        public static void Quit()
-        {
-            OnQuit?.Invoke();
-        }
-    }
+		public static void Quit()
+		{
+			OnQuit?.Invoke();
+		}
+	}
 }
