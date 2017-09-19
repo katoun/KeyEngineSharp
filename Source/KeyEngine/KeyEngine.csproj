@@ -1,7 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+	<AssemblyVersion>0.0.1</AssemblyVersion>
+	<PackageVersion>$(AssemblyVersion)</PackageVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -17,5 +20,7 @@
   <ItemGroup>
     <PackageReference Include="OpenTK.NETCore" Version="1.1.2749.6433" />
   </ItemGroup>
+  
+  <Import Project="$(MSBuildThisFileDirectory)KeyEngine.PackageInfo.props" />
 
 </Project>
