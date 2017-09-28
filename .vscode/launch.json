@@ -8,9 +8,14 @@
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "Build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/Bin/Debug/netcoreapp2.0/Player.Windows.dll",
+            "windows": {
+                "program": "${workspaceRoot}/Bin/Windows/Player.Windows.dll"
+            },
+            "linux": {
+                "program": "${workspaceRoot}/Bin/Linux/Player.Windows.dll"
+            },
             "args": [],
             "cwd": "${workspaceRoot}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window

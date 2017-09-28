@@ -1,14 +1,48 @@
 {
     "version": "0.1.0",
-    "command": "dotnet",
     "isShellCommand": true,
-    "args": [],
     "tasks": [
         {
-            "taskName": "build",
-            "args": [
-                "${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj"
-            ],
+            "taskName": "Build",
+            "command": "dotnet",
+            "windows": {
+                "args": [
+                    "build",
+                    "${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj",
+                    "-r", "win-x64",
+                    "-o", "${workspaceRoot}/Bin/Windows"
+                ]
+            },
+            "linux": {
+                "args": [
+                    "build",
+                    "${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj",
+                    "-r", "linux-x64",
+                    "-o", "${workspaceRoot}/Bin/Linux"
+                ]
+            },
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "Publish",
+            "command": "dotnet",
+            "windows": {
+                "args": [
+                    "publish",
+                    "${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj",
+                    "-r", "win-x64",
+                    "-o", "${workspaceRoot}/Publish/Windows"
+                ]
+            },
+            "linux": {
+                "args": [
+                    "publish",
+                    "${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj",
+                    "-r", "linux-x64",
+                    "-o", "${workspaceRoot}/Publish/Linux"
+                ]
+            },
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         }

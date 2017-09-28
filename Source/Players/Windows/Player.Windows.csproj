@@ -4,17 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\..\Bin\Debug\</OutputPath>
-    <IntermediateOutputPath>..\..\..\Build\Debug\</IntermediateOutputPath>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\..\Bin\Release\</OutputPath>
-    <IntermediateOutputPath>..\..\..\Build\Release\</IntermediateOutputPath>
-  </PropertyGroup>
-  
+    
   <ItemGroup>
     <ProjectReference Include="..\..\KeyEngine\KeyEngine.csproj" />
   </ItemGroup>
