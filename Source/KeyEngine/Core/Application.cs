@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace KeyEngine.Core
 {
@@ -11,6 +13,8 @@ namespace KeyEngine.Core
 		public static string Version = "v0.0.1";
 
 		protected static event Action OnQuit;
+
+		public static string ExecutableName { get; } = Path.GetFileName(typeof(Application).GetTypeInfo().Assembly.GetModules()[0].FullyQualifiedName);
 
 		public static void Quit()
 		{

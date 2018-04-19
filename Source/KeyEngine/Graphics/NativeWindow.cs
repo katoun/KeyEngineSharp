@@ -12,7 +12,7 @@ namespace KeyEngine.Graphics
 
 		public NativeWindow() : base(1280, 720)
 		{
-			// Make sure initial position are correct
+			// Make sure initial position is correct
 			positionX = X;
 			positionY = Y;
 

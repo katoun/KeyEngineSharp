@@ -1,5 +1,6 @@
 Bin/*
 Build/*
 Publish/*
+packages/*
 .vs
 obj

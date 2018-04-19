@@ -4,11 +4,11 @@ using System.Collections.Generic;
 namespace KeyEngine.Game
 {
 	[EditorIcon(Core.ResourceNames.IconGameObject)]
-	public class GameObject
+	public class GameObject : Core.IIdentifiable
 	{
 		string name;
 
-		Guid id;
+		Guid id = Guid.NewGuid();
 
 		bool active = true;
 

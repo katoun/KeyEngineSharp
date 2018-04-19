@@ -8,7 +8,8 @@
             "windows": {
                 "args": [
                     "build",
-                    "${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj",
+                    "${workspaceRoot}/Source/KeyEditor/KeyEditor.csproj",
+                    //"${workspaceRoot}/Source/Players/Windows/Player.Windows.csproj",
                     "-r", "win-x64",
                     "-o", "${workspaceRoot}/Bin/Windows"
                 ]
