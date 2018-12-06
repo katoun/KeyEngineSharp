@@ -3,16 +3,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:avalonDockThemesVS2013="clr-namespace:AvalonDock.Themes.VS2013;assembly=AvalonDock.Themes.VS2013"
         xmlns:local="clr-namespace:KeyEditor2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Hello .NET Core!" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="40"/>
-        <Button Content="Exit" Grid.Row="1" FontSize="20" Click="ButtonExit_Click"/>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Edit">
+                <MenuItem Command="Undo" />
+                <MenuItem Command="Redo" />
+                <Separator/>
+                <MenuItem Command="Cut" />
+                <MenuItem Command="Copy" />
+                <MenuItem Command="Paste" />
+            </MenuItem>
+            <MenuItem Header="Layout">
+                <MenuItem Header="Save">
+                    <MenuItem Header="Layout_1" Click="OnSaveLayout"/>
+                    <MenuItem Header="Layout_2" Click="OnSaveLayout"/>
+                    <MenuItem Header="Layout_3" Click="OnSaveLayout"/>
+                    <MenuItem Header="Layout_4" Click="OnSaveLayout"/>
+                </MenuItem>
+                <MenuItem Header="Load">
+                    <MenuItem Header="Layout_1" Click="OnLoadLayout"/>
+                    <MenuItem Header="Layout_2" Click="OnLoadLayout"/>
+                    <MenuItem Header="Layout_3" Click="OnLoadLayout"/>
+                    <MenuItem Header="Layout_4" Click="OnLoadLayout"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <avalonDock:DockingManager Grid.Row="1" x:Name="dockManager" AllowMixedOrientation="True">
+
+            <avalonDock:DockingManager.Theme>
+                <avalonDockThemesVS2013:Vs2013DarkTheme/>
+            </avalonDock:DockingManager.Theme>
+
+            <avalonDock:DockingManager.DocumentHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+                        <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </DataTemplate>
+            </avalonDock:DockingManager.DocumentHeaderTemplate>
+
+            <avalonDock:LayoutRoot>
+
+                <avalonDock:LayoutPanel Orientation="Horizontal">
+                    <avalonDock:LayoutAnchorablePane DockWidth="150">
+                        <avalonDock:LayoutAnchorable ContentId="Hierarchy" Title="Hierarchy" >
+                            <StackPanel Orientation="Vertical">
+                                <TextBox Text="Content"/>
+                            </StackPanel>
+                        </avalonDock:LayoutAnchorable>
+                    </avalonDock:LayoutAnchorablePane>
+                    <avalonDock:LayoutDocumentPaneGroup>
+                        <avalonDock:LayoutDocumentPane>
+                            <avalonDock:LayoutDocument ContentId="Scene" Title="Scene" >
+                                <StackPanel>
+                                    <TextBox Text="Content"/>
+                                </StackPanel>
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument ContentId="Game" Title="Game">
+                                <StackPanel>
+                                    <TextBox Text="Content"/>
+                                </StackPanel>
+                            </avalonDock:LayoutDocument>
+                        </avalonDock:LayoutDocumentPane>
+                    </avalonDock:LayoutDocumentPaneGroup>
+                    <avalonDock:LayoutAnchorablePaneGroup DockWidth="150">
+                        <avalonDock:LayoutAnchorablePane>
+                            <avalonDock:LayoutAnchorable ContentId="Inspector" Title="Inspector">
+                                <StackPanel>
+                                    <TextBox Text="Content"/>
+                                </StackPanel>
+                            </avalonDock:LayoutAnchorable>
+                        </avalonDock:LayoutAnchorablePane>
+                    </avalonDock:LayoutAnchorablePaneGroup>
+                </avalonDock:LayoutPanel>
+
+            </avalonDock:LayoutRoot>
+
+        </avalonDock:DockingManager>
     </Grid>
 </Window>

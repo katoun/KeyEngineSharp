@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:KeyEditor2"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="/AvalonDock.Themes.VS2013;component/DarkTheme.xaml" />
     </Application.Resources>
 </Application>
