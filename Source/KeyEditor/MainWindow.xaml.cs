@@ -18,7 +18,7 @@ using Xceed.Wpf.AvalonDock;
 using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
-namespace KeyEditor2
+namespace KeyEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

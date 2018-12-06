@@ -11,11 +11,22 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="AvalonDock.Themes.VS2013" Version="2.0.0.5" />
+    <None Remove="Themes\Dark.xaml" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock" Version="3.4.0.8" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="3.4.0.8" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\KeyEngine\KeyEngine.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Page Update="Themes\Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace KeyEditor2
+namespace KeyEditor
 {
     /// <summary>
     /// Interaction logic for App.xaml
